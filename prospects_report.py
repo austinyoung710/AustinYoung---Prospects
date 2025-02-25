@@ -46,29 +46,35 @@ Push all your updates to your gitHub repo. Your repo should contain the followin
 import csv
 
 #open file
+infile = open('prospects.csv', 'r')
 
 
 
 #create csv object
-
+csv_obj = csv.reader(infile)
 
 
 #skip header row
-
+next(csv_obj)
 
 
 
 #create a dictionary
-
+candidates_dict = {}
 
 
 # iterate through each row of the csv object using a for loop.
-
+for row in csv_obj:
+    name = row[1]
+    email = row[3]
+    phone = row[4]
+    salary = float(row[5])
 
 
     # check if salary is less than $70,000 and if it is add it to the
     # dictionary
-   
+    if salary < 70000:
+        candidates_dict[name] = {'email': email, 'phone': phone, 'salary': salary}
 
 
 
@@ -76,7 +82,11 @@ import csv
 
 # iternate through the dictionary and print out the details as 
 # shown in the instructions above
-
+        for name, contact_info in candidates_dict.items():
+            print(f'Name: {name}')
+            print(f'Email: {contact_info['email']}')
+            print(f'Phone: {contact_info['phone']}')
+            print(f'Salary: ${contact_info['salary']:.2f}\n\n')
 
 
 
